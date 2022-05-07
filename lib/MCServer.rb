@@ -7,11 +7,16 @@ module MCServer
   # # Your code goes here...
 
   class MCServer
-    attr_reader :pid, :path
+    attr_reader :pid, :path, :active
 
     def initialize(path = "~/Minecraft_Server")
       @path = path
       @pid = nil
+      @active = false
+    end
+
+    def active?
+      @active
     end
   end
 end
