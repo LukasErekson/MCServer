@@ -18,7 +18,7 @@ module MCServer
     end
 
     def command(_command_str)
-      raise ServerNotStartedError, "Cannot send command; the server is not started" unless self.active?
+      raise ServerNotStartedError "Cannot send command; the server is not started" unless self.active?
     end
   end
 end
