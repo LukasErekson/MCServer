@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 require_relative "MCServer/version"
+require_relative "MCServer/server_not_started_error"
 
 module MCServer
-  # class Error < StandardError; end
-  # # Your code goes here...
-
   class MCServer
     attr_reader :pid, :path, :active
 
@@ -17,6 +15,10 @@ module MCServer
 
     def active?
       @active
+    end
+
+    def command(_command_str)
+      raise ServerNotStartedError, "Cannot send command; the server is not started" unless self.active?
     end
   end
 end
