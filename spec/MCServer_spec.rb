@@ -25,7 +25,7 @@ RSpec.describe MCServer do
   end
 
   describe "#command" do
-    describe "when given an inactive server" do
+    context "when given an inactive server" do
       let(:server) { MCServer::MCServer.new }
 
       it "raises a ServerNotStartedError" do
