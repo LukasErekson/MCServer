@@ -23,7 +23,7 @@ Or install it yourself as:
 ```ruby
 server = MCServer.new
 
-server.path #=> ./Minecraft_Server
+server.path #=> ~/Minecraft_Server
 
 server.pid #=> 645851
 
