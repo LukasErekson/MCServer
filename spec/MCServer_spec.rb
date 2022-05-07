@@ -1,11 +1,23 @@
 # frozen_string_literal: true
 
+require "spec_helper"
+require "MCServer"
+
 RSpec.describe MCServer do
   it "has a version number" do
     expect(MCServer::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  describe "#new" do
+    let(:path) { "~/Minecraft_Server" }
+    let(:server) { MCServer::MCServer.new }
+
+    it "creates a MCServer object with empty pid" do
+      expect(server.pid).to eq nil
+    end
+
+    it "has a default path of ~/Minecraft_Server" do
+      expect(server.path).to eq path
+    end
   end
 end
