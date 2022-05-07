@@ -18,5 +18,9 @@ RSpec.describe MCServer do
     it "has a default path of ~/Minecraft_Server" do
       expect(server.path).to eq path
     end
+
+    it "defaults active to false" do
+      expect(server.active?).to be false
+    end
   end
 end
