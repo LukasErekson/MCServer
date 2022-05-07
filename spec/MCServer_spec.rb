@@ -23,4 +23,14 @@ RSpec.describe MCServer do
       expect(server.active?).to be false
     end
   end
+
+  describe "#command" do
+    describe "when given an inactive server" do
+      let(:server) { MCServer::MCServer.new }
+
+      it "raises a ServerNotStartedError" do
+        expect { server.command "/list" }.to raise_error(proc { ServerNotStartedError.new })
+      end
+    end
+  end
 end
