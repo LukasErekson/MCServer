@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'open3'
-
 require_relative "MCServer/version"
 require_relative "MCServer/server_not_started_error"
 require_relative "MCServer/server_already_running_error"
@@ -23,18 +21,20 @@ module MCServer
     end
 
     def start
-      raise ServerAlreadyRunningError "A server instance is already running" if active?
+      if active?
+        raise ServerAlreadyRunningError "A server instance is already running. To start antoher server, please create a new object instance"
+      end
+
       @read_io, @write_io = IO.pipe
 
       @pid = fork do
-        STDIN.reopen(@read_io)
-        STDOUT.reopen(@write_io)
+        $stdin.reopen(@read_io)
+        $stdout.reopen(@write_io)
 
         puts "Start server"
       end
 
       Process.detach(@pid)
-
 
       unless active?
         @pid = nil
@@ -60,6 +60,4 @@ module MCServer
       raise ServerNotStartedError "Cannot send command; the server is not started" unless active?
     end
   end
-
-  
 end
