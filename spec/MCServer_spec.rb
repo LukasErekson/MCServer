@@ -57,7 +57,7 @@ RSpec.describe MCServer do
       end
 
       it "raises a ServerAlreadyRunning error" do
-        expect{ @server.start }.to raise_error(proc { ServerAlreadyRunningError.new })
+        expect { @server.start }.to raise_error(proc { ServerAlreadyRunningError.new })
       end
 
       after(:all) do
@@ -86,7 +86,7 @@ RSpec.describe MCServer do
       end
 
       after(:all) do
-        @server.close unless @server.nil?
+        @server&.close
       end
     end
 
