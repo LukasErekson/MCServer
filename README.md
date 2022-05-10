@@ -1,13 +1,13 @@
-# MCServer
+# mc_server
 
-MCServer is a gem that creates an instance of a Minecraft Java Edition server to send commands to through Ruby. Each instance stores the PID, the output, and the input for the server process.
+mc_server is a gem that creates an instance of a Minecraft Java Edition server to send commands to through Ruby. Each instance stores the PID, the output, and the input for the server process.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'MCServer'
+gem 'mc_server'
 ```
 
 And then execute:
@@ -16,12 +16,12 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install MCServer
+    $ gem install mc_server
 
 ## Usage
 
 ```ruby
-server = MCServer.new
+server = mc_server.new
 
 server.path #=> ~/Minecraft_Server
 
@@ -42,7 +42,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/lukaserekson/MCServer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/lukaserekson/MCServer/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/lukaserekson/mc_server. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/lukaserekson/mc_server/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -50,4 +50,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the MCServer project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/lukaserekson/MCServer/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the mc_server project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/lukaserekson/mc_server/blob/main/CODE_OF_CONDUCT.md).

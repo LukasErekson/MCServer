@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/MCServer/version"
+require_relative "lib/mc_server/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "MCServer"
-  spec.version = MCServer::VERSION
+  spec.name = "mc_server"
+  spec.version = mc_server::VERSION
   spec.authors = ["Lukas"]
   spec.email = ["Lukas.Erekson@gmail.com"]
 

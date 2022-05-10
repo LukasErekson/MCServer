@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in MCServer.gemspec
+# Specify your gem's dependencies in mc_server.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

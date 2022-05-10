@@ -2,16 +2,12 @@
 
 require "spec_helper"
 
-RSpec.describe MCServer do
-  it "has a version number" do
-    expect(MCServer::VERSION).not_to be nil
-  end
-
+RSpec.describe Minecraft_Server do
   describe "#new" do
     let(:path) { "~/Minecraft_Server" }
-    let(:server) { MCServer::MCServer.new }
+    let(:server) { Minecraft_Server.new }
 
-    it "creates a MCServer object with empty pid" do
+    it "creates a mc_server object with empty pid" do
       expect(server.pid).to eq nil
     end
 
@@ -27,7 +23,7 @@ RSpec.describe MCServer do
   describe "#start" do
     context "when the server has not been started" do
       before(:all) do
-        @server = MCServer::MCServer.new
+        @server = Minecraft_Server.new
         @success = @server.start
       end
 
@@ -52,7 +48,7 @@ RSpec.describe MCServer do
 
     context "when a sever is already started" do
       before(:all) do
-        @server = MCServer::MCServer.new
+        @server = Minecraft_Server.new
         @server.start
       end
 
@@ -69,7 +65,7 @@ RSpec.describe MCServer do
   describe "#close" do
     context "when the server is running" do
       before(:each) do
-        @server = MCServer::MCServer.new
+        @server = Minecraft_Server.new
         @server.start
       end
 
@@ -91,7 +87,7 @@ RSpec.describe MCServer do
     end
 
     context "when the server is not running" do
-      let(:server) { MCServer::MCServer.new }
+      let(:server) { Minecraft_Server.new }
 
       it "raises a ServerNotStartedError" do
         expect { server.close }.to raise_error(proc { ServerNotStartedError.new })
@@ -101,7 +97,7 @@ RSpec.describe MCServer do
 
   describe "#command" do
     context "when given an inactive server" do
-      let(:server) { MCServer::MCServer.new }
+      let(:server) { Minecraft_Server.new }
 
       it "raises a ServerNotStartedError" do
         expect { server.command "/list" }.to raise_error(proc { ServerNotStartedError.new })
