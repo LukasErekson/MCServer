@@ -4,7 +4,6 @@ require "spec_helper"
 
 RSpec.describe Minecraft_Server do
   describe "#new" do
-    let(:path) { "~/Minecraft_Server" }
     let(:server) { Minecraft_Server.new }
 
     it "creates a mc_server object with empty pid" do
@@ -12,7 +11,7 @@ RSpec.describe Minecraft_Server do
     end
 
     it "has a default path of ~/Minecraft_Server" do
-      expect(server.path).to eq path
+      expect(server.path).to match(%r{/home/.*/Minecraft_Server})
     end
 
     it "defaults active to false" do

@@ -3,7 +3,7 @@
 class Minecraft_Server
   attr_reader :pid, :path, :active
 
-  def initialize(path = "~/Minecraft_Server")
+  def initialize(path = "#{Dir.home}/Minecraft_Server")
     @path = path
     @pid = nil
     @active = false
