@@ -15,12 +15,12 @@ class Minecraft_Server
     @active = !!`ps -p #{@pid}`["\n"]
   end
 
-  def start
+  def start(ram_size = '4G')
     if active?
       raise ServerAlreadyRunningError "A server instance is already running. To start antoher server, please create a new object instance"
     end
 
-    @pid = start_command
+    @pid = start_command(ram_size)
 
     Process.detach(@pid)
 
@@ -50,7 +50,7 @@ class Minecraft_Server
 
   protected
 
-  def start_command
+  def start_command(ram_size = '4G')
     @read_io, @write_io = IO.pipe
 
     Dir.chdir(path)
@@ -59,7 +59,7 @@ class Minecraft_Server
       $stdin.reopen(@read_io)
       $stdout.reopen(@write_io)
 
-      `java -jar #{path}/server.jar --nogui`
+      `java -Xmx#{ram_size} -Xms#{ram_size} -jar #{path}/server.jar --nogui`
     end
   end
 end
