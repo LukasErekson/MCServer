@@ -32,7 +32,7 @@ class Minecraft_Server
     true
   end
 
-  def close
+  def stop
     raise ServerNotStartedError "Cannot close the server; the server is not started" unless active?
 
     @write_io.puts "/stop"

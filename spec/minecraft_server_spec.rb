@@ -11,7 +11,7 @@ RSpec.describe Minecraft_Server do
     end
 
     it "has a default path of ~/Minecraft_Server" do
-      expect(server.path).to match(%r{/home/.*/Minecraft_Server})
+      expect(server.path).to match /\/home\/.*\/Minecraft_Server/
     end
 
     it "defaults active to false" do
@@ -41,7 +41,7 @@ RSpec.describe Minecraft_Server do
       end
 
       after(:all) do
-        @server.close
+        @server.stop
       end
     end
 
@@ -56,32 +56,32 @@ RSpec.describe Minecraft_Server do
       end
 
       after(:all) do
-        @server.close
+        @server.stop
       end
     end
   end
 
-  describe "#close" do
+  describe "#stop" do
     context "when the server is running" do
       before(:each) do
         @server = Minecraft_Server.new
         @server.start
       end
 
-      it "returns true upon successful close" do
-        expect(@server.close).to be true
+      it "returns true upon successful stop" do
+        expect(@server.stop).to be true
       end
 
       it "reassigns the process id to nil" do
-        expect { @server.close }.to change { @server.pid }.to(nil)
+        expect { @server.stop }.to change { @server.pid }.to(nil)
       end
 
       it "changes server.active? to be false" do
-        expect { @server.close }.to change { @server.active? }.to(false)
+        expect { @server.stop }.to change { @server.active? }.to(false)
       end
 
       after(:all) do
-        @server&.close
+        @server&.stop
       end
     end
 
@@ -89,7 +89,7 @@ RSpec.describe Minecraft_Server do
       let(:server) { Minecraft_Server.new }
 
       it "raises a ServerNotStartedError" do
-        expect { server.close }.to raise_error(proc { ServerNotStartedError.new })
+        expect { server.stop }.to raise_error(proc { ServerNotStartedError.new })
       end
     end
   end

@@ -32,6 +32,8 @@ server.pid #=> 645851
 server.command '/op Grian' #=> true
 
 server.command '/kick Skeppy Trolling' #=> true
+
+server.stop #=> true
 ```
 
 ## Development
