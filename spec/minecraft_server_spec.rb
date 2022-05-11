@@ -34,7 +34,7 @@ RSpec.describe Minecraft_Server do
         @server.start
       end
 
-      it "the server receives the command" do
+      xit "the server receives the command" do
         sleep(1) until @server.log.readline.include? "Done"
 
         @server.command "/list"
@@ -63,7 +63,6 @@ RSpec.describe Minecraft_Server do
       before(:each) do
         @server = Minecraft_Server.new
         allow_any_instance_of(Minecraft_Server).to receive(:start_command).and_return(2)
-        @server.instance_eval("@read_io, @write_io = IO.pipe", __FILE__, __LINE__)
         @success = @server.start
       end
 
@@ -90,17 +89,11 @@ RSpec.describe Minecraft_Server do
       before(:each) do
         @server = Minecraft_Server.new
         allow_any_instance_of(Minecraft_Server).to receive(:start_command).and_return(2)
-        @server.instance_eval("@read_io, @write_io = IO.pipe", __FILE__, __LINE__)
         allow(@server).to receive(:active?).and_return true
       end
 
       it "raises a ServerAlreadyRunning error" do
         expect { @server.start }.to raise_error(proc { ServerAlreadyRunningError.new })
-      end
-
-      after(:each) do
-        @server.instance_eval("@read_io.close", __FILE__, __LINE__)
-        @server.instance_eval("@write_io.close", __FILE__, __LINE__)
       end
     end
   end
@@ -110,7 +103,6 @@ RSpec.describe Minecraft_Server do
       before(:each) do
         @server = Minecraft_Server.new
         allow_any_instance_of(Minecraft_Server).to receive(:start_command).and_return(2)
-        @server.instance_eval("@read_io, @write_io = IO.pipe", __FILE__, __LINE__)
         @server.start
       end
 

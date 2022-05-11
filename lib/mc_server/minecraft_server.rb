@@ -20,6 +20,8 @@ class Minecraft_Server
       raise ServerAlreadyRunningError "A server instance is already running. To start antoher server, please create a new object instance"
     end
 
+    @read_io, @write_io = IO.pipe
+
     @pid = start_command(ram_size)
 
     Process.detach(@pid)
@@ -58,8 +60,6 @@ class Minecraft_Server
   protected
 
   def start_command(ram_size = "4G")
-    @read_io, @write_io = IO.pipe
-
     Dir.chdir(path)
 
     fork do
