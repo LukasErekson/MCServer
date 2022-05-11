@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Minecraft_Server
-  attr_reader :pid, :path, :active, :read_io, :write_io
+  attr_reader :pid, :path, :active, :log
 
   def initialize(path = "#{Dir.home}/Minecraft_Server")
     @path = path
@@ -24,10 +24,9 @@ class Minecraft_Server
 
     Process.detach(@pid)
 
-    unless active?
-      @pid = nil
-      close
-    end
+    @log = File.new("logs/latest.log")
+
+    stop unless active?
 
     true
   end
@@ -38,13 +37,14 @@ class Minecraft_Server
     @write_io.puts "/stop"
     @read_io.close
     @write_io.close
+    @log.close
 
     @pid = nil
 
     true
   end
 
-  def command(_command_str)
+  def command(command_str)
     raise ServerNotStartedError "Cannot send command; the server is not started" unless active?
   end
 
