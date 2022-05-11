@@ -46,6 +46,13 @@ class Minecraft_Server
 
   def command(command_str)
     raise ServerNotStartedError "Cannot send command; the server is not started" unless active?
+
+    root_command = command_str.split[0]
+    return false unless MC_Server::VALID_COMMANDS.include? root_command
+
+    @write_io.puts command_str
+
+    true
   end
 
   protected
