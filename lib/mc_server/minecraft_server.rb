@@ -26,6 +26,8 @@ class Minecraft_Server
 
     Process.detach(@pid)
 
+    sleep(3) # Wait for a new latest.log to start.
+
     @log = File.new("logs/latest.log")
 
     stop unless active?
