@@ -52,6 +52,11 @@ RSpec.describe Minecraft_Server do
         expect(@server.command("give me diamonds")).to be false
       end
 
+      it "calls #stop when given stop command" do
+        expect(@server).to receive(:stop).and_return(true)
+        @server.command("/stop")
+      end
+
       after(:all) do
         @server.stop
       end
