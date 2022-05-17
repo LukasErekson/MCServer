@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
+require "stringio"
 
 RSpec.describe Minecraft_Server do
   describe "#new" do
@@ -133,6 +134,39 @@ RSpec.describe Minecraft_Server do
 
       it "raises a ServerNotStartedError" do
         expect { server.stop }.to raise_error(proc { ServerNotStartedError.new })
+      end
+    end
+  end
+
+  describe "#players" do
+    context "when the server is running" do
+      before(:each) do
+        @server = Minecraft_Server.new
+        allow(@server).to receive(:active?).and_return(true)
+
+        allow(@server).to receive(:command).and_return(true)
+      end
+
+      it "returns empty array for 0 players" do
+        @server.instance_variable_set(:@log,
+                                      StringIO.new("[21:36:26] [Server thread/INFO]: There are 0 of a max of 20 players online: "))
+
+        expect(@server.players).to eq([])
+      end
+
+      it "returns an array of player names for several players" do
+        @server.instance_variable_set(:@log,
+                                      StringIO.new("[21:36:26] [Server thread/INFO]: There are 0 of a max of 20 players online: Dream GeorgeNotFound Sapnap Technoblade"))
+
+        expect(@server.players).to eq(%w[Dream GeorgeNotFound Sapnap Technoblade])
+      end
+    end
+
+    context "when the server is not running" do
+      let(:server) { Minecraft_Server.new }
+
+      it "raises a ServerNotStarterError" do
+        expect { server.players }.to raise_error(proc { ServerNotStartedError.new })
       end
     end
   end
