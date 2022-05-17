@@ -62,6 +62,14 @@ class Minecraft_Server
     true
   end
 
+  def players
+    raise ServerNotStartedError "Cannot retreive players; there is no running server instance" unless active?
+
+    return @log.readlines[-1].split[13...] if command "/list"
+
+    []
+  end
+
   protected
 
   def start_command(ram_size = "4G")
