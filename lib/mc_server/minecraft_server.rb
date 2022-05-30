@@ -1,20 +1,31 @@
 # frozen_string_literal: true
 
+##
+# Minecraft server instance that allows commands to be sent to the server.
 class Minecraft_Server
   attr_reader :pid, :path, :active, :log
 
+  ##
+  # Sets the path of the Minecraft_Server instance.
   def initialize(path = "#{Dir.home}/Minecraft_Server")
     @path = path
     @pid = nil
     @active = false
   end
 
+  ##
+  # Checks whether the server is active. That is a current instance is running.
   def active?
     return @active = false if @pid.nil?
 
     @active = !!`ps -p #{@pid}`["\n"]
   end
 
+  ##
+  # Starts a server instance and saves instance variables such as PID and the
+  # log file.
+  #
+  # @param String : How many GB of ram to allocate for the server. e.g - 4GB
   def start(ram_size = "4G")
     if active?
       raise ServerAlreadyRunningError "A server instance is already running. To start antoher server, please create a new object instance"
@@ -35,6 +46,8 @@ class Minecraft_Server
     true
   end
 
+  ##
+  # Stops the active server instance and closes and open IO prots.
   def stop
     raise ServerNotStartedError "Cannot close the server; the server is not started" unless active?
 
@@ -48,6 +61,11 @@ class Minecraft_Server
     true
   end
 
+  ##
+  # Sends a given command to the server to run. Only allows commands from the
+  # valid list of commands.
+  #
+  # @param String : The full command to send to the server.
   def command(command_str)
     raise ServerNotStartedError "Cannot send command; the server is not started" unless active?
 
@@ -62,6 +80,8 @@ class Minecraft_Server
     true
   end
 
+  ##
+  # Return an array of online player names on the server.
   def players
     raise ServerNotStartedError "Cannot retreive players; there is no running server instance" unless active?
 
@@ -72,6 +92,10 @@ class Minecraft_Server
 
   protected
 
+  ##
+  # Creates a new process for the Minecraft server instance
+  #
+  # @param String : The amount of RAM to allocate to the server instance.
   def start_command(ram_size = "4G")
     Dir.chdir(path)
 
