@@ -8,8 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Lukas"]
   spec.email = ["Lukas.Erekson@gmail.com"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "A gem used for interfacing with a Minecraft server instance via Ruby."
   spec.homepage = "https://github.com/LukasErekson/MCServer"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
