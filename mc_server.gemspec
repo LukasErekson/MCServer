@@ -4,7 +4,7 @@ require_relative "lib/mc_server/version"
 
 Gem::Specification.new do |spec|
   spec.name = "mc_server"
-  spec.version = mc_server::VERSION
+  spec.version = MC_Server::VERSION
   spec.authors = ["Lukas"]
   spec.email = ["Lukas.Erekson@gmail.com"]
 
