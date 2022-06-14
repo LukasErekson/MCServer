@@ -14,10 +14,6 @@ RSpec.describe Minecraft_Server do
     it "has a default path of ~/Minecraft_Server" do
       expect(server.path).to match(%r{/home/.*/Minecraft_Server})
     end
-
-    it "defaults active to false" do
-      expect(server.active?).to be false
-    end
   end
 
   describe "#command" do

@@ -3,22 +3,21 @@
 ##
 # Minecraft server instance that allows commands to be sent to the server.
 class Minecraft_Server
-  attr_reader :pid, :path, :active, :log
+  attr_reader :pid, :path, :log
 
   ##
   # Sets the path of the Minecraft_Server instance.
   def initialize(path = "#{Dir.home}/Minecraft_Server")
     @path = path
     @pid = nil
-    @active = false
   end
 
   ##
   # Checks whether the server is active. That is a current instance is running.
   def active?
-    return @active = false if @pid.nil?
+    return false if @pid.nil?
 
-    @active = !!`ps -p #{@pid}`["\n"]
+    !!`ps -p #{@pid}`["\n"]
   end
 
   ##
